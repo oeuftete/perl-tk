@@ -593,6 +593,7 @@ Tcl_GetEncoding (Tcl_Interp * interp, CONST char * name)
    dSP;
    ENTER;
    SAVETMPS;
+PUSHSTACKi(PERLSI_REQUIRE);
    PUSHMARK(sp);
    XPUSHs(sv_2mortal(newSVpv("Tk",0)));
    XPUSHs(nmsv);
@@ -604,6 +605,7 @@ Tcl_GetEncoding (Tcl_Interp * interp, CONST char * name)
    he = hv_store_ent(encodings,nmsv,newSVsv(sv),0);
    if (0 && !SvOK(sv))
     warn("Cannot find '%s'",name);
+POPSTACK;
    FREETMPS;
    LEAVE;
   }
